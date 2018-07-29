@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.autocheckupdate.MainActivity">
+
+    <include layout="@layout/toolbar_layout"></include>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    </android.support.v4.view.ViewPager>
+<View
+    android:background="@color/grey_400"
+    android:layout_height="1px"
+    android:layout_width="match_parent">
+
+</View>
+    <RadioGroup
+        android:id="@+id/rg_01"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
+
+        <RadioButton
+            android:id="@+id/rb_01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home_tab_photo_01"
+            android:gravity="center"
+            android:paddingTop="0dp"
+            android:text="新闻"
+            android:textColor="@drawable/selector_home_tab"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_home_tab_photo_02"
+            android:gravity="center"
+            android:paddingTop="0dp"
+            android:text="视听"
+            android:textColor="@drawable/selector_home_tab"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_03"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_home_tab_photo_03"
+            android:gravity="center"
+            android:paddingTop="0dp"
+            android:text="阅读"
+            android:textColor="@drawable/selector_home_tab"
+            android:textSize="12sp"/>
+
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--灰色-->
+    <color name="grey_100">#f5f5f5</color>
+    <color name="grey_200">#eeeeee</color>
+    <color name="grey_250">#e6e6e6</color>
+    <color name="grey_300">#e0e0e0</color>
+    <color name="grey_350">#cccccc</color>
+    <color name="grey_400">#bdbdbd</color>
+    <color name="grey_500">#9e9e9e</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+    <color name="barColor">#444444</color>
+    <color name="white">#ffffff</color>
+    <color name="tab_checked">#ED6A2C</color>
+    <color name="tab_unchecked">#757575</color>
+
+    <!--主要颜色-->
+    <color name="bg">#f0f0f0</color>
+    <color name="bg_blur">#87000000</color>
+    <color name="main_bg">#f0f0f0</color>
+    <color name="main_red">#f22f22</color>
+    <color name="main_black">#000</color>
+    <color name="main_white">#fff</color>
+    <color name="main_light_red">#ff8585</color>
+    <color name="main_light_blue">#77c6f7</color>
+    <color name="main_orange">#ffae00</color>
+    <color name="main_yellow">#fff79b</color>
+    <color name="main_light_orange">#fdf7d8</color>
+    <!--字体颜色-->
+    <color name="text_black">#333</color>
+    <color name="text_dark_gray">#666</color>
+    <color name="text_gray">#999</color>
+    <color name="text_middle_gray">#aaa</color>
+    <color name="text_light_gray">#ccc</color>
+    <color name="text_white">#fff</color>
+    <color name="text_orange">#bd864e</color>
+    <!--分割线颜色-->
+    <color name="div_light">#ddd</color>
+    <color name="div_dark">#ccc</color>
+    <!--标题栏背景色-->
+    <color name="bg_title_bar">@color/main_white</color>
+    <!--按钮颜色-->
+    <!--红色按钮-->
+    <color name="bg_main_button_red_normal">@color/main_red</color>
+    <color name="bg_main_button_red_disable">#faaca7</color>
+    <color name="text_main_button_red_normal">@color/text_white</color>
+    <color name="text_main_button_red_temp_disable">#66ffffff</color>
+    <color name="text_main_button_red_disable">#66ffffff</color>
+    <!--红色边框按钮-->
+    <color name="border_main_button_red_border_normal">@color/main_red</color>
+    <color name="border_main_button_red_border_disable">#ccc</color>
+    <color name="text_main_button_red_border_normal">@color/main_red</color>
+    <color name="text_main_button_red_border_temp_disable">#faaca7</color>
+    <color name="text_main_button_red_border_disable">@color/text_light_gray</color>
+    <!--黑色边框按钮-->
+    <color name="border_main_button_black_border_normal">#333</color>
+    <color name="border_main_button_black_border_disable">#ccc</color>
+    <color name="text_main_button_black_border_normal">@color/text_black</color>
+    <color name="text_main_button_black_border_disable">@color/text_light_gray</color>
+    <!--对话框按钮-->
+    <color name="bg_dialog_button_positive">@color/main_black</color>
+    <color name="text_dialog_button_positive">@color/main_white</color>
+    <color name="border_dialog_button_negative">#333</color>
+    <color name="text_dialog_button_negative">@color/text_black</color>
+    <color name="main_color_black">#252935</color>
+    <color name="transparent">#00000000</color>
+    <color name="bg_store_food">#c2360f</color>
+    <color name="bg_store_good">#338ad4</color>
+
+    <color name="column_click_bg">#ffc9c9</color>
+    <color name="column_click_tv">#f22f22</color>
+
+
+    <!-- QRCode scanner color begin -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#B0000000</color>
+    <color name="viewfinder_frame">#90FFFFFF</color>
+    <color name="result_point_color">#C0FFFF00</color>
+    <color name="laser_color">#0F0</color>
+    <color name="corner_color">#00FF00</color>
+    <!-- QRCode scanner color end -->
+</resources>

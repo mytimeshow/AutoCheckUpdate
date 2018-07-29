@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AutoCheckUpdate</string>
+
+    <string name="network_exception">网络不稳定</string>
+    <string name="server_exception">服务器异常</string>
+    <string name="login_expired_exception">登录过期,请重新登录</string>
+    <string name="app_update">版本更新</string>
+</resources>
