@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 
 import com.example.autocheckupdate.base.BaseActivity;
+import com.example.autocheckupdate.http.MyIntercept;
+import com.example.autocheckupdate.http.ProgressListener;
 import com.example.autocheckupdate.module.camera.TakePictureActivity;
 import com.example.autocheckupdate.utils.CheckVersionUpdateUtil;
 import com.example.autocheckupdate.utils.Logger;
@@ -48,26 +50,14 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     }
 
-    //@SuppressLint("MissingPermission")
-    //  @TargetApi(Build.VERSION_CODES.M)
+    @SuppressLint("MissingPermission")
     @Override
     protected void initData() {
         if (!RxPermissonUtil.checkPermisson(this, Manifest.permission.CALL_PHONE)) {
-            //RxPermissonUtil.requestPermission(this,Manifest.permission.CALL_PHONE,this);
+            RxPermissonUtil.requestPermission(this,Manifest.permission.CALL_PHONE,this);
         } else {
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse("tel:10086"));
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                showToast("permisson granted");
-                return;
-            }
             startActivity(intent);
         }
 
@@ -78,6 +68,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
     }
 
     @Override
@@ -146,9 +142,15 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 mRadioGroup.check(R.id.rb_01);
                     break;
                 case R.id.rb_02:
+                    CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().showToash();
                     mRadioGroup.check(R.id.rb_02);
                     break;
                 case R.id.rb_03:
+
+                    unbindService( CheckVersionUpdateUtil.getInstance().setContext(this).getConn());
+                    //CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().stopSelf();
+                    //CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().onUnbind(CheckVersionUpdateUtil.getInstance().setContext(this).getIntent());
+                   // CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().onDestroy();
                     mRadioGroup.check(R.id.rb_03);
                     break;
             }

@@ -32,7 +32,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView{
-
+    private static final String TAG = "BaseActivity";
     public Toolbar mToolbar;
     private TextView toolbarRightText;
     private ImageView toolbarRightImage;
@@ -69,7 +69,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
 
         if (mToolbar != null) {
-
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
           // setToolBarLeftIcon(R.mipmap.ic_back);
@@ -138,7 +137,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
         requestLoadingDialogTimes++;
     }
-
     @Override
     public void dismissLoadingDialog() {
         requestLoadingDialogTimes--;
@@ -149,7 +147,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             Logger.d("dismissLoading","Dialog####");
         }
     }
-
     @Override
     public void showToast(String msg) {
         if (mToast == null) {
@@ -159,15 +156,35 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
         mToast.show();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Logger.d(TAG,"onDestroy");
        if(mImmersionBar!=null) mImmersionBar.destroy();
         if(disposable!=null) disposable.dispose();
         AppManagerUtil.getInstance().finishActivity(this);
     }
+    @Override
+    protected void onPause() {
+        Logger.d(TAG,"onPause");
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Logger.d(TAG,"onStop");
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Logger.d(TAG,"onStart");
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.d(TAG,"onResume");
+    }
     /**
      * 隐藏软键盘
      */
@@ -177,7 +194,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             manager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
-
     @Override
     public void showError(Throwable e) {
 
@@ -206,6 +222,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         }
 
+
+        public abstract void onSuccess(T o);
         @Override
         public void onError(Throwable e) {
             baseActivity.showError(e);
@@ -226,4 +244,5 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public interface OnToolBarClickListener {
         void onClick();
     }
+
 }

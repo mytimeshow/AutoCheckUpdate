@@ -127,8 +127,8 @@ public class NetUse {
     }
 
     static class CommomParamsIntercept implements Interceptor {
-        JsDownloadListener jsDownloadListener;
-        public CommomParamsIntercept(JsDownloadListener jsDownloadListener){
+        ProgressListener jsDownloadListener;
+        public CommomParamsIntercept(ProgressListener jsDownloadListener){
             this.jsDownloadListener=jsDownloadListener;
         }
         @Override
@@ -142,7 +142,7 @@ public class NetUse {
                     .addHeader("Cookie", "add cookies here")
                     .build();
             Response response=chain.proceed(request);
-            return response.newBuilder().body(new BaseResponse(response.body(),jsDownloadListener)).build();
+            return response.newBuilder().body(new ProgressResponseBody(response.body(),jsDownloadListener)).build();
         }
     }
 
