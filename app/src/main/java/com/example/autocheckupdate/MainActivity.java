@@ -62,6 +62,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
 
         Logger.e(TAG,"mainthread is "+ Thread.currentThread().getName());
+        Logger.e(TAG,"mainthread is "+ Thread.currentThread().getName());  Logger.e(TAG,"mainthread is "+ Thread.currentThread().getName());
        
 
 
