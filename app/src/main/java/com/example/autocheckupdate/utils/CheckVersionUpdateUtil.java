@@ -1,5 +1,6 @@
 package com.example.autocheckupdate.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -18,10 +19,11 @@ import com.example.autocheckupdate.service.DownLaodService;
  */
 
 public class CheckVersionUpdateUtil {
-    private static final String TAG = "CheckVersionUpdateUtil";
-    private static ServiceConnection conn;
-    private static DownLaodService downLaodService;
-    private static Context context;
+    private  final String TAG = "CheckVersionUpdateUtil";
+    private  ServiceConnection conn;
+    private  DownLaodService downLaodService;
+    private Intent intent;
+    private  Context context;
     private static CheckVersionUpdateUtil mInstance;
     private int remoteVersion;
     public CheckVersionUpdateUtil setContext( Context context){
@@ -41,13 +43,23 @@ public class CheckVersionUpdateUtil {
         return mInstance;
     }
 
+  public DownLaodService getDownLaodService(){
+        return downLaodService;
+  }
+  public Intent getIntent(){
+      return intent;
+  }
+  public ServiceConnection getConn(){
+      return conn;
+  }
 
     public  void  initService(){
         conn=new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                final DownLaodService.Mybinder mybinder= (DownLaodService.Mybinder) iBinder;
+                  DownLaodService.Mybinder   mybinder= (DownLaodService.Mybinder) iBinder;
                 downLaodService=mybinder.getDownLaodService();
+                mybinder.setServiceConection(conn);
                 downLaodService.downLoadApk();
 
             }
@@ -57,7 +69,7 @@ public class CheckVersionUpdateUtil {
 
             }
         };
-        Intent intent=new Intent(context,DownLaodService.class);
+         intent=new Intent(context,DownLaodService.class);
         context.bindService(intent,conn, Service.BIND_AUTO_CREATE);
     }
     //检查当前版本与服务器的版本，不同则更新

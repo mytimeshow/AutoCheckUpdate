@@ -171,6 +171,8 @@ public class DownLaodService extends Service{
         notificationManager.cancel(NOTIFY_ID);
         Logger.d(TAG,"PendingIntent");
         Intent intent=installIntent((String)message.obj);
+        //startActivity(intent);
+
         PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(),0,intent,0
                /* PendingIntent.FLAG_UPDATE_CURRENT*/);
         builder.setContentTitle(getPackageName().substring(getPackageName().lastIndexOf(".")+1))
@@ -182,14 +184,12 @@ public class DownLaodService extends Service{
            notification.flags=Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(NOTIFY_ID, notification);
         stopSelf();
-
         //  listenner.onFinished();
         //stopSelf();
-        Logger.d(TAG,"PendingIntent dddddd");
+
     }
 
     private void initNotifiationProgress(ResponseBody responseBody) {
-        Logger.d(TAG+"onnext","onNext");
         if(responseBody==null){
             Message message=Message.obtain();
             message.what=1;
@@ -223,8 +223,9 @@ public class DownLaodService extends Service{
             while ((len=is.read(bytes))!=-1){
                 fos.write(bytes,0,len);
                 sum+=len;
-                progress= (int) (sum*1.0f*100/length);
-                if(progress==1 || progress%2==0){
+
+                if((int) (sum*1.0f*100/length)-progress==1){
+                    progress= (int) (sum*1.0f*100/length);
                     Message message=Message.obtain();
                     message.what=0;
                     message.obj=progress;
@@ -236,11 +237,11 @@ public class DownLaodService extends Service{
             message.what=2;
             message.obj=file.getAbsolutePath();
             handler.sendMessage(message);
+
             //   Logger.d(TAG+"onnext" ,"finished");
         }catch (Exception e){
             Logger.d(TAG,e.getMessage().toString());
         }finally {
-            Logger.d("finally ","finished ");
             try {
                 if(is!=null){
                     is.close();
@@ -263,8 +264,17 @@ public class DownLaodService extends Service{
     }
     @Override
     public void onDestroy() {
+        Logger.d(TAG,"ondestory");
         super.onDestroy();
         Logger.d(TAG,"ondestory");
+    }
+    public void showToash(){
+        Toast.makeText(DownLaodService.this,"service is still alive",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Logger.d(TAG,"onUnbind");
+        return super.onUnbind(intent);
     }
 
     @Override
@@ -277,6 +287,7 @@ public class DownLaodService extends Service{
     }
 
     public class Mybinder extends Binder{
+
         public DownLaodService getDownLaodService(){
             return DownLaodService.this;
                     }

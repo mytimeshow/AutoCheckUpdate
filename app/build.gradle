@@ -21,6 +21,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //glide图片变换
+
+
         jackOptions.enabled = true;
         jackOptions.enabled = true;
         multiDexEnabled true
@@ -83,4 +86,5 @@ dependencies {
     //运行时权限
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }

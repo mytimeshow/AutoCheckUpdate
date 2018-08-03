@@ -48,7 +48,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <service android:name=".service.DownLaodService" />
+        <service android:name=".service.DownLaodService"
+
+
+            />
 
         <activity android:name=".module.camera.TakePictureActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>

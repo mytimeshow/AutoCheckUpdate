@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import okhttp3.internal.platform.Platform;
+
 /**
  * Created by 夜听海雨 on 2018/7/7.
  */
@@ -26,5 +28,6 @@ public class MyApplication extends Application{
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+
     }
 }
