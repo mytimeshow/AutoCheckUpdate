@@ -26,7 +26,12 @@ import com.example.autocheckupdate.utils.Logger;
 import com.example.autocheckupdate.utils.RxPermissonUtil;
 import com.example.autocheckupdate.zxing.activity.CaptureActivity;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.Url;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, Consumer<Boolean> {
@@ -52,26 +57,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     //  @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void initData() {
-        if (!RxPermissonUtil.checkPermisson(this, Manifest.permission.CALL_PHONE)) {
-            //RxPermissonUtil.requestPermission(this,Manifest.permission.CALL_PHONE,this);
-        } else {
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:10086"));
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                showToast("permisson granted");
-                return;
-            }
-            startActivity(intent);
-        }
 
-        Logger.e(TAG,"mainthread is "+ Thread.currentThread().getName());
+
+
+
+
+
+
 
 
 
@@ -79,7 +71,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
 
     }
-
+   
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1002 && resultCode==RESULT_OK){
