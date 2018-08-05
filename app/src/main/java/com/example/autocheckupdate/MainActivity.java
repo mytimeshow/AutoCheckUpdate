@@ -13,6 +13,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,15 +23,22 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 
 import com.example.autocheckupdate.base.BaseActivity;
+import com.example.autocheckupdate.base.BaseFragment;
 import com.example.autocheckupdate.http.MyIntercept;
 import com.example.autocheckupdate.http.ProgressListener;
 import com.example.autocheckupdate.module.camera.TakePictureActivity;
+import com.example.autocheckupdate.module.mainFragment.AudioFragment;
+import com.example.autocheckupdate.module.mainFragment.MineFragment;
+import com.example.autocheckupdate.module.mainFragment.NewsFragment;
 import com.example.autocheckupdate.utils.CheckVersionUpdateUtil;
 import com.example.autocheckupdate.utils.Logger;
 import com.example.autocheckupdate.utils.RxPermissonUtil;
 import com.example.autocheckupdate.zxing.activity.CaptureActivity;
 
 import com.tbruyelle.rxpermissions2.Permission;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -42,6 +52,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private static final String TAG = "MainActivity";
     private RadioGroup mRadioGroup;
     private ViewPager mViewPager;
+    private MyAdapter myAdapter;
     private  int camera_type=0;//0为扫码,1为拍照
 
     @Override
@@ -55,6 +66,32 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mViewPager = findViewById(R.id.viewPager_main);
         mRadioGroup.setOnCheckedChangeListener(this);
         toolbarTitleText.setText("title");
+        myAdapter=new MyAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(myAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position==0){
+                    mRadioGroup.check(R.id.rb_01);
+                }else if(position==1){
+                    mRadioGroup.check(R.id.rb_02);
+                }else {
+                    mRadioGroup.check(R.id.rb_03);
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
     }
 
@@ -62,13 +99,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     protected void initData() {
 
-        if (!RxPermissonUtil.checkPermisson(this, Manifest.permission.CALL_PHONE)) {
+      /*  if (!RxPermissonUtil.checkPermisson(this, Manifest.permission.CALL_PHONE)) {
             RxPermissonUtil.requestPermission(this,Manifest.permission.CALL_PHONE,this);
         } else {
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse("tel:10086"));
             startActivity(intent);
-        }
+        }*/
 
 
 
@@ -99,6 +136,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==1002 && resultCode==RESULT_OK){
             Bundle bundle=data.getExtras();
+            if(bundle.getString("result").contains("http")){
+                Intent intent=new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(bundle.getString("result")));
+                    startActivity(intent);
+            }
             showToast(bundle.getString("result"));
         }
 
@@ -165,17 +207,14 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             switch (checkedId){
                 case R.id.rb_01:
                 mRadioGroup.check(R.id.rb_01);
+                mViewPager.setCurrentItem(0);
                     break;
                 case R.id.rb_02:
-                    CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().showToash();
+                    mViewPager.setCurrentItem(1);
                     mRadioGroup.check(R.id.rb_02);
                     break;
                 case R.id.rb_03:
-
-                    unbindService( CheckVersionUpdateUtil.getInstance().setContext(this).getConn());
-                    //CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().stopSelf();
-                    //CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().onUnbind(CheckVersionUpdateUtil.getInstance().setContext(this).getIntent());
-                   // CheckVersionUpdateUtil.getInstance().setContext(this).getDownLaodService().onDestroy();
+                    mViewPager.setCurrentItem(2);
                     mRadioGroup.check(R.id.rb_03);
                     break;
             }
@@ -195,5 +234,34 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             CheckVersionUpdateUtil.getInstance().setContext(this).checkVersion();
         }
 
+    }
+
+    static class MyAdapter extends FragmentPagerAdapter{
+        private List<Fragment> fragmentList;
+
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
+            fragmentList=new ArrayList<>();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if(position==0){
+                NewsFragment newsFragment=new NewsFragment();
+                return newsFragment;
+            }else if(position==1){
+                AudioFragment audioFragment=new AudioFragment();
+                return audioFragment;
+            }else if(position==2){
+                MineFragment mineFragment=new MineFragment();
+                return mineFragment;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
     }
 }

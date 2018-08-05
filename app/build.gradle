@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs{
-        update{
+    signingConfigs {
+        update {
             keyAlias 'autocheckupdata'
             keyPassword '740691860'
-          storeFile file('..\\autocheckupdata.jks')
+            storeFile file('..\\autocheckupdata.jks')
             storePassword '740691860'
         }
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:my="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textSize="@dimen/sp_12"
+        android:gravity="center"
+        android:text="这是新闻页面"
+        android:id="@+id/tv_news_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+<com.example.autocheckupdate.widget.ChooseTabView
+    my:textSize="@dimen/sp_12"
+    android:id="@+id/choose_tab_view"
+    android:layout_width="@dimen/dp_200"
+    android:layout_height="@dimen/dp_20"
+
+    />
+
+
+
+</RelativeLayout>

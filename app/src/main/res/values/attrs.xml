@@ -56,4 +56,12 @@
         <attr name="label_text" format="string"/>
         <attr name="label_text_size" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="ChooseTabView">
+        <attr name="selectedTextColor" format="color"></attr>
+        <attr name="selectedCircleColor" format="color"></attr>
+        <attr name="CircleRdius" format="dimension"></attr>
+        <attr name="textSize" format="dimension"></attr>
+    </declare-styleable>
+
 </resources>
